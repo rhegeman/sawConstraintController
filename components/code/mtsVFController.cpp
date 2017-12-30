@@ -76,7 +76,8 @@ void mtsVFController::UpdateJointPosLimitsVF(const std::string vfName, const vct
     AddVFAbsoluteJointLimits(AJLimitsData);
 }
 
-void mtsVFController::UpdatePlaneVF(const std::string vfName, const std::string curKinName, const vct3 plane_point, const vct3 plane_normal)
+void mtsVFController::UpdatePlaneVF(const std::string vfName, const std::string curKinName,
+    const vct3 plane_point, const vct3 plane_normal)
 {    
     PlaneData.IneqConstraintRows = 1;
     PlaneData.Name = vfName;
@@ -113,14 +114,11 @@ bool mtsVFController::SetVFData(const mtsVFDataBase & data, const std::type_info
 
     // if found, get std::typeid(iter->second) and compare to type
     // if same type, just update iter->second->Data and return true
-    if(typeid(itVF->second) == type)
-    {
-        DecrementUsers(itVF->second->Data->KinNames,itVF->second->Data->SensorNames);
-        itVF->second->Data = new mtsVFDataBase(data);
-        IncrementUsers(itVF->second->Data->KinNames,itVF->second->Data->SensorNames);
-        return true;
-    }
-    return false;
+    DecrementUsers(itVF->second->Data->KinNames,itVF->second->Data->SensorNames);
+    delete itVF->second->Data;
+    itVF->second->Data = new mtsVFDataBase(data);
+    IncrementUsers(itVF->second->Data->KinNames,itVF->second->Data->SensorNames);
+    return true;
 }
 
 bool mtsVFController::SetVFDataSensorCompliance(const mtsVFDataSensorCompliance & data, const std::type_info & type)
@@ -137,14 +135,11 @@ bool mtsVFController::SetVFDataSensorCompliance(const mtsVFDataSensorCompliance 
 
     // if found, get std::typeid(iter->second) and compare to type
     // if same type, just update iter->second->Data and return true
-    if(typeid(itVF->second) == type)
-    {
-        DecrementUsers(itVF->second->Data->KinNames,itVF->second->Data->SensorNames);
-        itVF->second->Data = new mtsVFDataSensorCompliance(data);
-        IncrementUsers(itVF->second->Data->KinNames,itVF->second->Data->SensorNames);
-        return true;
-    }
-    return false;
+    DecrementUsers(itVF->second->Data->KinNames,itVF->second->Data->SensorNames);
+    delete itVF->second->Data;
+    itVF->second->Data = new mtsVFDataSensorCompliance(data);
+    IncrementUsers(itVF->second->Data->KinNames,itVF->second->Data->SensorNames);
+    return true;
 }
 
 bool mtsVFController::SetVFDataPlane(const mtsVFDataPlane &data, const std::type_info &type)
@@ -159,16 +154,11 @@ bool mtsVFController::SetVFDataPlane(const mtsVFDataPlane &data, const std::type
         return false;
     }
 
-    // if found, get std::typeid(iter->second) and compare to type
-    // if same type, just update iter->second->Data and return true
-    if(typeid(itVF->second) == type)
-    {
-        DecrementUsers(itVF->second->Data->KinNames,itVF->second->Data->SensorNames);
-        itVF->second->Data = new mtsVFDataPlane(data);
-        IncrementUsers(itVF->second->Data->KinNames,itVF->second->Data->SensorNames);
-        return true;
-    }
-    return false;
+    DecrementUsers(itVF->second->Data->KinNames,itVF->second->Data->SensorNames);
+    delete itVF->second->Data;
+    itVF->second->Data = new mtsVFDataPlane(data);
+    IncrementUsers(itVF->second->Data->KinNames,itVF->second->Data->SensorNames);
+    return true;
 }
 
 //! Adds/updates a basic virtual fixture that uses joint velocity control in the map and increments users of kinematics and sensors
@@ -178,13 +168,13 @@ bool mtsVFController::SetVFDataPlane(const mtsVFDataPlane &data, const std::type
 void mtsVFController::AddVFJointVelocity(const mtsVFDataBase & vf)
 {
     // If we can find the VF, only change its data. Otherwise, create a new VF object.
-    // if (!SetVFData(vf, typeid(mtsVFJointVelocity)))
-    // {
+    if (!SetVFData(vf, typeid(mtsVFJointVelocity)))
+    {
         // Add a new virtual fixture to the active vector
         VFMap[vf.Name] = new mtsVFJointVelocity(vf.Name,new mtsVFDataBase(vf));
         // Increment users of each kinematics and sensor object found
         IncrementUsers(vf.KinNames,vf.SensorNames);
-    // }
+    }
 }
 
 //! Adds/updates a basic virtual fixture that uses incremental joint position control in the map and increments users of kinematics and sensors
@@ -194,13 +184,13 @@ void mtsVFController::AddVFJointVelocity(const mtsVFDataBase & vf)
 void mtsVFController::AddVFJointPosition(const mtsVFDataBase & vf)
 {
     // If we can find the VF, only change its data. Otherwise, create a new VF object.
-    // if (!SetVFData(vf, typeid(mtsVFJointPosition)))
-    // {
+    if (!SetVFData(vf, typeid(mtsVFJointPosition)))
+    {
         // Adds a new virtual fixture to the active vector
         VFMap.insert(std::pair<std::string,mtsVFBase *>(vf.Name,new mtsVFJointPosition(vf.Name,new mtsVFDataBase(vf))));
         // Increment users of each kinematics and sensor object found
         IncrementUsers(vf.KinNames,vf.SensorNames);
-    // }
+    }
 }
 
 //! Adds/updates a basic virtual fixture that uses cartesian velocity control in the map and increments users of kinematics and sensors
@@ -210,13 +200,13 @@ void mtsVFController::AddVFJointPosition(const mtsVFDataBase & vf)
 void mtsVFController::AddVFCartesianTranslation(const mtsVFDataBase & vf)
 {
     // If we can find the VF, only change its data. Otherwise, create a new VF object.
-    // if (!SetVFData(vf, typeid(mtsVFCartesianTranslation)))
-    // {
+    if (!SetVFData(vf, typeid(mtsVFCartesianTranslation)))
+    {
         // Adds a new virtual fixture to the active vector
         VFMap.insert(std::pair<std::string,mtsVFBase *>(vf.Name,new mtsVFCartesianTranslation(vf.Name,new mtsVFDataBase(vf))));
         // Increment users of each kinematics and sensor object found
         IncrementUsers(vf.KinNames,vf.SensorNames);
-    // }
+    }
 }
 
 
@@ -227,13 +217,13 @@ void mtsVFController::AddVFCartesianTranslation(const mtsVFDataBase & vf)
 void mtsVFController::AddVFCartesianOrientation(const mtsVFDataBase & vf)
 {
     // If we can find the VF, only change its data. Otherwise, create a new VF object.
-    // if (!SetVFData(vf, typeid(mtsVFCartesianOrientation)))
-    // {
+    if (!SetVFData(vf, typeid(mtsVFCartesianOrientation)))
+    {
         // Adds a new virtual fixture to the active vector
         VFMap.insert(std::pair<std::string,mtsVFBase *>(vf.Name,new mtsVFCartesianOrientation(vf.Name,new mtsVFDataBase(vf))));
         // Increment users of each kinematics and sensor object found
         IncrementUsers(vf.KinNames,vf.SensorNames);
-    // }
+    }
 }
 
 //! Adds/updates a sensor compliance virtual fixture in the map and increments users of kinematics and sensors
@@ -243,13 +233,13 @@ void mtsVFController::AddVFCartesianOrientation(const mtsVFDataBase & vf)
 void mtsVFController::AddVFSensorCompliance(const mtsVFDataSensorCompliance & vf)
 {
     // If we can find the VF, only change its data. Otherwise, create a new VF object.
-    // if (!SetVFDataSensorCompliance(vf, typeid(mtsVFSensorCompliance)))
-    // {
+    if (!SetVFDataSensorCompliance(vf, typeid(mtsVFSensorCompliance)))
+    {
         // Adds a new virtual fixture to the active vector
         VFMap.insert(std::pair<std::string,mtsVFSensorCompliance *>(vf.Name,new mtsVFSensorCompliance(vf.Name,new mtsVFDataSensorCompliance(vf))));
         // Increment users of each kinematics and sensor object found
         IncrementUsers(vf.KinNames,vf.SensorNames);
-    // }
+    }
 }
 
 //! Adds/updates a sensor compliance virtual fixture in the map and increments users of kinematics and sensors
@@ -259,13 +249,13 @@ void mtsVFController::AddVFSensorCompliance(const mtsVFDataSensorCompliance & vf
 void mtsVFController::AddVFPlane(const mtsVFDataPlane & vf)
 {
     // If we can find the VF, only change its data. Otherwise, create a new VF object.
-    // if (!SetVFDataPlane(vf, typeid(mtsVFPlane)))
-    // {
+    if (!SetVFDataPlane(vf, typeid(mtsVFPlane)))
+    {
         // Adds a new virtual fixture to the active vector
         VFMap.insert(std::pair<std::string,mtsVFPlane *>(vf.Name, new mtsVFPlane(vf.Name,new mtsVFDataPlane(vf))));
         // Increment users of each kinematics and sensor object found
         IncrementUsers(vf.KinNames,vf.SensorNames);
-    // }
+    }
 }
 
 //! Adds/updates an RCM virtual fixture in the map and increments users of kinematics and sensors
@@ -274,9 +264,9 @@ void mtsVFController::AddVFPlane(const mtsVFDataPlane & vf)
 */
 void mtsVFController::AddVFRCM(const mtsVFDataRCM & vf)
 {    
-    // If we can find the VF, only change its data. Otherwise, create a new VF object.
-   // if (!SetVFDataRCM(vf, typeid(mtsVF_RCM)))
-   // {
+   // If we can find the VF, only change its data. Otherwise, create a new VF object.
+   if (!SetVFDataRCM(vf, typeid(mtsVF_RCM)))
+   {
        // Adds a new virtual fixture to the active vector
        // std::cout << "Adding new VF" << std::endl;       
     
@@ -286,7 +276,7 @@ void mtsVFController::AddVFRCM(const mtsVFDataRCM & vf)
        // std::cout << "Added new VF: " << typeid(VFMap.find(vf.Name)->second).name() << std::endl;
        // Increment users of each kinematics and sensor object found
        IncrementUsers(vf.KinNames,vf.SensorNames);
-   // }
+   }
 }
 
 //! Adds/updates a path-following virtual fixture in the map and increments users of kinematics and sensors
@@ -295,15 +285,15 @@ void mtsVFController::AddVFRCM(const mtsVFDataRCM & vf)
 */
 void mtsVFController::AddVFFollowPath(const mtsVFDataBase & vf)
 {
-    // If we can find the VF, only change its data. Otherwise, create a new VF object.
-   // if (!SetVFData(vf, typeid(mtsVFFollow)))
-   // {
+   // If we can find the VF, only change its data. Otherwise, create a new VF object.
+   if (!SetVFData(vf, typeid(mtsVFFollow)))
+   {
        // Adds a new virtual fixture to the active vector
        VFMap[vf.Name] = new mtsVFFollow(vf.Name,new mtsVFDataBase(vf));
        // std::cout << "Added new VF: " << typeid(VFMap.find(vf.Name)->second).name() << std::endl;
        // Increment users of each kinematics and sensor object found
        IncrementUsers(vf.KinNames,vf.SensorNames);
-   // }
+   }
 }
 
 //! Adds/updates a velocity-limiting virtual fixture in the map and increments users of kinematics and sensors
@@ -312,14 +302,14 @@ void mtsVFController::AddVFFollowPath(const mtsVFDataBase & vf)
 */
 void mtsVFController::AddVFJointLimits(const mtsVFDataJointLimits & vf)
 {
-    // If we can find the VF, only change its data. Otherwise, create a new VF object.
-   // if (!SetVFData(vf, typeid(mtsVFJointLimits)))
-   // {
+   // If we can find the VF, only change its data. Otherwise, create a new VF object.
+   if (!SetVFData(vf, typeid(mtsVFJointLimits)))
+   {
        // Adds a new virtual fixture to the active vector
        VFMap.insert(std::pair<std::string,mtsVFJointLimits *>(vf.Name,new mtsVFJointLimits(vf.Name,new mtsVFDataJointLimits(vf))));
        // Increment users of each kinematics and sensor object found
        IncrementUsers(vf.KinNames,vf.SensorNames);
-   // }
+   }
 }
 
 //! Adds/updates a velocity-limiting virtual fixture in the map and increments users of kinematics and sensors
@@ -328,14 +318,14 @@ void mtsVFController::AddVFJointLimits(const mtsVFDataJointLimits & vf)
 */
 void mtsVFController::AddVFCartesianLimits(const mtsVFDataJointLimits & vf)
 {
-    // If we can find the VF, only change its data. Otherwise, create a new VF object.
-   // if (!SetVFData(vf, typeid(mtsVFJointLimits)))
-   // {
+   // If we can find the VF, only change its data. Otherwise, create a new VF object.
+   if (!SetVFData(vf, typeid(mtsVFJointLimits)))
+   {
        // Adds a new virtual fixture to the active vector
        VFMap.insert(std::pair<std::string,mtsVFCartesianLimits *>(vf.Name,new mtsVFCartesianLimits(vf.Name,new mtsVFDataJointLimits(vf))));
        // Increment users of each kinematics and sensor object found
        IncrementUsers(vf.KinNames,vf.SensorNames);
-   // }
+   }
 }
 
 //! Adds/updates a velocity-limiting virtual fixture in the map and increments users of kinematics and sensors
@@ -344,14 +334,14 @@ void mtsVFController::AddVFCartesianLimits(const mtsVFDataJointLimits & vf)
 */
 void mtsVFController::AddVFAbsoluteJointLimits(const mtsVFDataAbsoluteJointLimits & vf)
 {
-    // If we can find the VF, only change its data. Otherwise, create a new VF object.
-   // if (!SetVFDataAJL(vf, typeid(mtsVFAbsoluteJointLimits)))
-   // {
+   // If we can find the VF, only change its data. Otherwise, create a new VF object.
+   if (!SetVFDataAJL(vf, typeid(mtsVFAbsoluteJointLimits)))
+   {
        // Adds a new virtual fixture to the active vector
        VFMap[vf.Name] = new mtsVFAbsoluteJointLimits(vf.Name,new mtsVFDataAbsoluteJointLimits(vf));
        // Increment users of each kinematics and sensor object found
-//       IncrementUsers(vf.KinNames,vf.SensorNames);
-   // }
+       IncrementUsers(vf.KinNames,vf.SensorNames);
+   }
 }
 
 //TODO either change this to match other SETVF methods or change other methods to match this one
@@ -369,14 +359,11 @@ bool mtsVFController::SetVFDataRCM(const mtsVFDataRCM & data, const std::type_in
 
     // if found, get std::typeid(iter->second) and compare to type
     // if same type, just update iter->second->Data and return true
-    if(typeid(itVF->second) == type)
-    {     
-        DecrementUsers(itVF->second->Data->KinNames,itVF->second->Data->SensorNames);
-        itVF->second->Data = new mtsVFDataRCM(data);
-        IncrementUsers(itVF->second->Data->KinNames,itVF->second->Data->SensorNames);
-        return true;
-    }    
-    return false;
+    DecrementUsers(itVF->second->Data->KinNames,itVF->second->Data->SensorNames);
+    delete itVF->second->Data;
+    itVF->second->Data = new mtsVFDataRCM(data);
+    IncrementUsers(itVF->second->Data->KinNames,itVF->second->Data->SensorNames);
+    return true;
 }
 
 //TODO either change this to match other SETVF methods or change other methods to match this one
@@ -394,14 +381,11 @@ bool mtsVFController::SetVFDataAJL(const mtsVFDataAbsoluteJointLimits & data, co
 
     // if found, get std::typeid(iter->second) and compare to type
     // if same type, just update iter->second->Data and return true
-    if(typeid(itVF->second) == type)
-    {        
-        DecrementUsers(itVF->second->Data->KinNames,itVF->second->Data->SensorNames);
-        itVF->second->Data = new mtsVFDataAbsoluteJointLimits(data);
-        IncrementUsers(itVF->second->Data->KinNames,itVF->second->Data->SensorNames);
-        return true;
-    }    
-    return false;
+    DecrementUsers(itVF->second->Data->KinNames,itVF->second->Data->SensorNames);
+    delete itVF->second->Data;
+    itVF->second->Data = new mtsVFDataAbsoluteJointLimits(data);
+    IncrementUsers(itVF->second->Data->KinNames,itVF->second->Data->SensorNames);
+    return true;
 }
 
 bool mtsVFController::ActivateVF(const std::string & s)

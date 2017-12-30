@@ -78,7 +78,7 @@ void mtsVFPlane::FillInTableauRefs(const CONTROLLERMODE CMN_UNUSED(mode), const 
     }    
 
 
-    vctDynamicMatrix<double> Jacobian3x6( 3, 6, VCT_COL_MAJOR );
+    vctDynamicMatrix<double> Jacobian3x6( 3, 7, VCT_COL_MAJOR );
     for (size_t i = 0; i < Jacobian3x6.rows(); ++i)
         for (size_t j = 0; j < Jacobian3x6.cols(); ++j)
             Jacobian3x6.at(i,j) = CurrentKinematics->Jacobian.at(i,j);
