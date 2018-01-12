@@ -31,12 +31,6 @@ mtsVFBase::mtsVFBase(const std::string & name, mtsVFDataBase * data)
     Data = data;
     Kinematics.clear();
     Sensors.clear();    
-
-/*
-    @TODO
-    If no kinematics specified
-*/
-//    data->KinNames.push_back(DefaultKinematicsName);
 }
 
 //! Reserves space in the control optimizer.
@@ -117,3 +111,4 @@ vctDoubleMat mtsVFBase::Skew(const vctDoubleVec &in)
     out[2][1] = in[0];
     return out;
 }
+

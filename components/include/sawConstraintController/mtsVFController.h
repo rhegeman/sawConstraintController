@@ -51,7 +51,8 @@
 // Always include last!
 #include <sawConstraintController/sawConstraintControllerExport.h>
 
-/*! \brief mtsVFController: A class that is responsible for managing the virtual fixtures, relevant state data, and the control optimizer
+/*! \brief mtsVFController: A class that is responsible for managing the
+    virtual fixtures, relevant state data, and the control optimizer
  */
 class CISST_EXPORT mtsVFController: public cmnGenericObject
 {
@@ -98,12 +99,22 @@ public:
         }
     }
 
-    void UpdateFollowPathVF(const std::string & vfName, const std::string & CurKinName, const std::string & DesKinName, const bool & UseRotation = false);
-    void UpdateJointVelLimitsVF(const std::string vfName, const vctDoubleVec & UpperLimits, const vctDoubleVec & LowerLimits);
-    void UpdateCartVelLimitsVF(const std::string vfName, const std::string kinName, const vctDoubleVec & UpperLimits, const vctDoubleVec & LowerLimits);
-    void UpdateJointPosLimitsVF(const std::string vfName, const vctDoubleVec & UpperLimits, const vctDoubleVec & LowerLimits, const vctDoubleVec & CurrentJoints);
-    void UpdatePlaneVF(const std::string vfName, const std::string curKinName, const vct3 plane_point, const vct3 plane_normal);    
-    void UpdateRCMVF(const size_t rows, const std::string vfName, const std::string curKinName, const vct3 & RCMPoint, const vctDoubleMat & JacClosest, const vctFrm3 & TipFrame);
+    void UpdateFollowPathVF(const std::string & vfName,
+      const std::string & CurKinName, const std::string & DesKinName,
+      const bool & UseRotation = false);
+    void UpdateJointVelLimitsVF(const std::string vfName,
+      const vctDoubleVec & UpperLimits, const vctDoubleVec & LowerLimits);
+    void UpdateCartVelLimitsVF(const std::string vfName,
+      const std::string kinName, const vctDoubleVec & UpperLimits,
+      const vctDoubleVec & LowerLimits);
+    void UpdateJointPosLimitsVF(const std::string vfName,
+      const vctDoubleVec & UpperLimits, const vctDoubleVec & LowerLimits,
+      const vctDoubleVec & CurrentJoints);
+    void UpdatePlaneVF(const std::string vfName, const std::string curKinName,
+      const vct3 plane_point, const vct3 plane_normal);    
+    void UpdateRCMVF(const size_t rows, const std::string vfName,
+      const std::string curKinName, const vct3 & RCMPoint,
+      const vctDoubleMat & JacClosest, const vctFrm3 & TipFrame);
 
     nmrConstraintOptimizer GetOptimizer(){return Optimizer;}
 
@@ -122,22 +133,6 @@ public:
 
     //! Adds/Updates a vf data object
     void AddVFCartesianOrientation(const mtsVFDataBase & vf);
-
-    //! Adds/Updates a vf data object
-    void AddVFSensorCompliance(const mtsVFDataSensorCompliance & vf);
-
-    //! Adds/Updates a vf plane object
-    void AddVFPlane(const mtsVFDataPlane &vf);        
-
-    void AddVFFollowPath(const mtsVFDataBase & vf);
-
-    void AddVFRCM(const mtsVFDataRCM & vf);
-
-    void AddVFJointLimits(const mtsVFDataJointLimits & vf);
-
-    void AddVFCartesianLimits(const mtsVFDataJointLimits & vf);
-
-    void AddVFAbsoluteJointLimits(const mtsVFDataAbsoluteJointLimits & vf);     
 
     //! Adds/Updates a sensor to the map
     void SetSensor(const prmSensorState & sen);
@@ -172,34 +167,20 @@ public:
     //map between string names and pointers to sensor objects
     std::map<std::string, prmSensorState *> Sensors;
 
-    //robot joint state
-    prmStateJoint JointState;
-
     //control optimizer variables
     nmrConstraintOptimizer Optimizer;
 
     //! Helper function that increments users of new vf
-    void IncrementUsers(const std::vector<std::string> kin_names, const std::vector<std::string> sensor_names);
+    void IncrementUsers(const std::vector<std::string> kin_names,
+        const std::vector<std::string> sensor_names);
 
     //! Helper function that decrements users of new data in an old vf
-    void DecrementUsers(const std::vector<std::string> kin_names, const std::vector<std::string> sensor_names);
+    void DecrementUsers(const std::vector<std::string> kin_names,
+        const std::vector<std::string> sensor_names);
 
-    bool SetVFData(const mtsVFDataBase & data, const std::type_info & type);
+    template<typename VFT, typename DT> void SetVF(const DT &vf);
 
-    bool SetVFDataSensorCompliance(const mtsVFDataSensorCompliance & data, const std::type_info & type);
-
-    bool SetVFDataPlane(const mtsVFDataPlane & data, const std::type_info & type);
-
-    bool SetVFDataRCM(const mtsVFDataRCM & data, const std::type_info & type);
-
-    bool SetVFDataAJL(const mtsVFDataAbsoluteJointLimits & data, const std::type_info & type);   
-
-    mtsVFDataBase FollowData;
-    mtsVFDataJointLimits JLimitsData;
-    mtsVFDataJointLimits CLimitsData;
-    mtsVFDataAbsoluteJointLimits AJLimitsData;
-    mtsVFDataPlane PlaneData;
-    mtsVFDataRCM RCM_Data;
+    template<typename DT> bool SetVFData(const DT &data);
 
 };
 

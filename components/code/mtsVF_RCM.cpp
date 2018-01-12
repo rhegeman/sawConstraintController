@@ -10,7 +10,7 @@ void mtsVF_RCM::FillInTableauRefs(const CONTROLLERMODE CMN_UNUSED(mode), const d
     // Constraint-Based RCM
     vct3 Axis = -RCM_Data->TipFrame.Rotation() * vct3(0,0,1);
     ClosestPoint = ClosestLinePoint(vctDoubleVec(RCM_Data->RCM_Point), vctDoubleVec(RCM_Data->TipFrame.Translation()), vctDoubleVec(Axis));
-    FillMoveConstraints3D(H,h,ur,Axis,ClosestPoint-RCM_Data->RCM_Point,0.001,RCM_Data->IneqConstraintRows);
+    FillMoveConstraints3D(H,h,ur,Axis,ClosestPoint-RCM_Data->RCM_Point,0.002,RCM_Data->IneqConstraintRows);
     vctDoubleMat RCM_Mat = H*RCM_Data->JacClosest;
 
     //populate matrix and vector
