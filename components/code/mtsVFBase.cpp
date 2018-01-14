@@ -29,6 +29,7 @@ mtsVFBase::mtsVFBase(const std::string & name, mtsVFDataBase * data)
 {
     Name = name;
     Data = data;
+    Active = true;
     Kinematics.clear();
     Sensors.clear();    
 }

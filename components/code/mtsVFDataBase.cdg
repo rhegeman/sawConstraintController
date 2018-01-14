@@ -23,14 +23,6 @@ class {
       visibility public;
     }
 
-    //! If this virtual fixture is active or not
-    member {
-      default true;
-      name Active;
-      type bool;
-      visibility public;
-    }
-
     //! The names of the kinematics dependencies of the virtual fixture
     member {
       name KinNames;

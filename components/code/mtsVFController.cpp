@@ -35,7 +35,7 @@ bool mtsVFController::ActivateVF(const std::string & s)
     {
         return false;
     }
-    itVF->second->Data->Active = true;
+    itVF->second->Active = true;
     return true;    
 }
 
@@ -44,9 +44,9 @@ void mtsVFController::DeactivateAll()
     std::map<std::string,mtsVFBase *>::iterator itVF;
     for(itVF = VFMap.begin(); itVF != VFMap.end(); itVF++)
     {
-        if(itVF->second->Data->Active)
+        if(itVF->second->Active)
         {
-            itVF->second->Data->Active = false;
+            itVF->second->Active = false;
         }
     }
 }
@@ -132,7 +132,7 @@ void mtsVFController::UpdateOptimizer(double TickTime)
     std::map<std::string,mtsVFBase*>::iterator itVF;
     for(itVF = VFMap.begin(); itVF != VFMap.end(); itVF++)
     {       
-        if(itVF->second->Data->Active)
+        if(itVF->second->Active)
         {
             itVF->second->ReserveSpace(Optimizer);
         }
@@ -149,7 +149,7 @@ void mtsVFController::UpdateOptimizer(double TickTime)
     {
         mtsVFBase * tempVFData = itVF->second;        
 
-        if(tempVFData->Data->Active)
+        if(tempVFData->Active)
         {
             
             //updates the virtual fixture's kinematics and sensor objects

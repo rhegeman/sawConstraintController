@@ -44,6 +44,8 @@ public:
     //! Internally stored data
     mtsVFDataBase * Data;
 
+    bool Active;
+
     //! Frame object
     std::vector<prmKinematicsState *> Kinematics;
 
