@@ -28,12 +28,12 @@ public:
 
 private:
 
-	vct3 ClosestPoint;
+    vct3 ClosestPoint;
     vctDoubleMat H;
     vctDoubleVec h;
     vct3 ur;
 
-	void FillMoveConstraints3D(vctDoubleMat &H, vctDoubleVec &h,
+    void FillMoveConstraints3D(vctDoubleMat &H, vctDoubleVec &h,
                                vct3 &ur,
                                vct3 direction,
                                vct3 error,
@@ -137,3 +137,4 @@ private:
 CMN_DECLARE_SERVICES_INSTANTIATION(mtsVF_RCM);
 
 #endif
+

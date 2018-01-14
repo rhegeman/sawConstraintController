@@ -2,7 +2,7 @@
 /* ex: set filetype=cpp softtabstop=4 shiftwidth=4 tabstop=4 cindent expandtab: */
 
 /*
-  Author(s):  Paul Wilkening
+  Author(s):  Paul Wilkening, Rachel Hegeman
   Created on: 2014
 
  (C) Copyright 2014 Johns Hopkins University (JHU), All Rights Reserved.
@@ -26,26 +26,9 @@
 #endif
 
 #include <sawConstraintController/mtsVFBase.h>
-#include <sawConstraintController/mtsVFJointVel.h>
-#include <sawConstraintController/mtsVFJointPos.h>
-#include <sawConstraintController/mtsVFDataSensorCompliance.h>
-#include <sawConstraintController/mtsVFSensorCompliance.h>
 #include <sawConstraintController/prmKinematicsState.h>
 #include <sawConstraintController/prmSensorState.h>
 #include <sawConstraintController/prmOffsetState.h>
-#include <sawConstraintController/mtsVFCartVel.h>
-#include <sawConstraintController/mtsVFCartOrientationVel.h>
-#include <sawConstraintController/mtsVFPlane.h>
-#include <sawConstraintController/mtsVFFollow.h>
-#include <typeinfo>
-#include <sawConstraintController/mtsVFJointLimits.h>
-#include <sawConstraintController/mtsVFAbsoluteJointLimits.h>
-#include <sawConstraintController/mtsVFCartesianLimits.h>
-#include <sawConstraintController/mtsVFDataJointLimits.h>
-#include <sawConstraintController/mtsVFPlane.h>
-#include <sawConstraintController/mtsVFDataRCM.h>
-#include <sawConstraintController/mtsVF_RCM.h>
-#include <sawConstraintController/mtsVFFollow.h>
 #include <cisstParameterTypes/prmStateJoint.h>
 
 // Always include last!
@@ -99,40 +82,11 @@ public:
         }
     }
 
-    void UpdateFollowPathVF(const std::string & vfName,
-      const std::string & CurKinName, const std::string & DesKinName,
-      const bool & UseRotation = false);
-    void UpdateJointVelLimitsVF(const std::string vfName,
-      const vctDoubleVec & UpperLimits, const vctDoubleVec & LowerLimits);
-    void UpdateCartVelLimitsVF(const std::string vfName,
-      const std::string kinName, const vctDoubleVec & UpperLimits,
-      const vctDoubleVec & LowerLimits);
-    void UpdateJointPosLimitsVF(const std::string vfName,
-      const vctDoubleVec & UpperLimits, const vctDoubleVec & LowerLimits,
-      const vctDoubleVec & CurrentJoints);
-    void UpdatePlaneVF(const std::string vfName, const std::string curKinName,
-      const vct3 plane_point, const vct3 plane_normal);    
-    void UpdateRCMVF(const size_t rows, const std::string vfName,
-      const std::string curKinName, const vct3 & RCMPoint,
-      const vctDoubleMat & JacClosest, const vctFrm3 & TipFrame);
-
     nmrConstraintOptimizer GetOptimizer(){return Optimizer;}
 
     bool ActivateVF(const std::string & s);
 
     void DeactivateAll(); 
-
-    //! Adds/Updates a vf data object
-    void AddVFJointVelocity(const mtsVFDataBase & vf);
-
-    //! Adds/Updates a vf data object
-    void AddVFJointPosition(const mtsVFDataBase & vf);
-
-    //! Adds/Updates a vf data object
-    void AddVFCartesianTranslation(const mtsVFDataBase & vf);
-
-    //! Adds/Updates a vf data object
-    void AddVFCartesianOrientation(const mtsVFDataBase & vf);
 
     //! Adds/Updates a sensor to the map
     void SetSensor(const prmSensorState & sen);
@@ -146,8 +100,7 @@ public:
     //! Finds the "base" object for kinematics and sensor data that has an offset
     void LookupBaseData(void);
 
-    //! Adds/Updates a kinematics object to the map
-    void SetKinematics(const prmKinematicsState & kin);
+    void UpdateKinematics(void);
 
     //! Removes a kinematics object from the map
     void RemoveKinematicsFromMap(const std::string & kinName);
@@ -159,13 +112,13 @@ public:
     nmrConstraintOptimizer::STATUS Solve(vctDoubleVec & dq);
 
     //map between string names and pointers to virtual fixtures
-    std::map<std::string, mtsVFBase *> VFMap;
+    std::map<std::string, mtsVFBase*> VFMap;
 
     //map between string names and pointers to kinematics objects
-    std::map<std::string, prmKinematicsState *> Kinematics;
+    std::map<std::string, prmKinematicsState*> Kinematics;
 
     //map between string names and pointers to sensor objects
-    std::map<std::string, prmSensorState *> Sensors;
+    std::map<std::string, prmSensorState*> Sensors;
 
     //control optimizer variables
     nmrConstraintOptimizer Optimizer;
@@ -179,12 +132,13 @@ public:
         const std::vector<std::string> sensor_names);
 
     template<typename VFT, typename DT> void SetVF(const DT &vf);
-
     template<typename DT> bool SetVFData(const DT &data);
-
+    template<typename KT> void SetKinematics(const KT &kin);
 };
 
 CMN_DECLARE_SERVICES_INSTANTIATION(mtsVFController);
+
+#include "mtsVFController-inl.h"
 
 #endif // _mtsVFController_h
 
