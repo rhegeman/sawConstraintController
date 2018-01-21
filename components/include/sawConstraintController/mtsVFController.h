@@ -128,8 +128,6 @@ public:
     template<typename KT> void SetKinematics(const KT &kin);
 };
 
-CMN_DECLARE_SERVICES_INSTANTIATION(mtsVFController);
-
 #include "mtsVFController-inl.h"
 
 #endif // _mtsVFController_h
