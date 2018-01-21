@@ -1,7 +1,5 @@
 #include <sawConstraintController/mtsVF_RCM.h>
 
-CMN_IMPLEMENT_SERVICES(mtsVF_RCM);
-
 void mtsVF_RCM::FillInTableauRefs(const CONTROLLERMODE CMN_UNUSED(mode), const double TickTime)
 {
 

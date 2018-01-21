@@ -18,8 +18,6 @@
 
 #include <sawConstraintController/mtsVFJointLimits.h>
 
-CMN_IMPLEMENT_SERVICES(mtsVFJointLimits)
-
 //! Updates co with virtual fixture data.
 /*! FillInTableauRefs
 */

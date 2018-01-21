@@ -22,28 +22,23 @@
 #include <cisstVector/vctDynamicVectorTypes.h>
 #include <cisstVector/vctDynamicMatrixTypes.h>
 #include <sawConstraintController/mtsVFBase.h>
-#include <sawConstraintController/mtsVFJointPos.h>
 #include <sawConstraintController/mtsVFDataJointLimits.h>
-
-// Always include last!
-#include <sawConstraintController/sawConstraintControllerExport.h>
 
 /*! \brief mtsVFJointLimits: A class that contains logic for the implementation of  Plane virtual fixtures
  */
-class CISST_EXPORT mtsVFJointLimits : public mtsVFJointPosition
+class mtsVFJointLimits : public mtsVFBase
 {
-    CMN_DECLARE_SERVICES(CMN_DYNAMIC_CREATION, CMN_LOG_LOD_RUN_VERBOSE);
 
 public:
 
     /*! Constructor
     */
-    mtsVFJointLimits() : mtsVFJointPosition(){}
+    mtsVFJointLimits() : mtsVFBase(){}
 
     /*! Constructor
     \param name String name of object
     */
-    mtsVFJointLimits(const std::string & name, mtsVFDataJointLimits * data) : mtsVFJointPosition(name,data){}
+    mtsVFJointLimits(const std::string & name, mtsVFDataJointLimits * data) : mtsVFBase(name,data){}
 
     //! Updates co with virtual fixture data.
     /*! FillInTableauRefs
@@ -51,7 +46,5 @@ public:
     void FillInTableauRefs(const mtsVFBase::CONTROLLERMODE mode, const double TickTime);
 
 };
-
-CMN_DECLARE_SERVICES_INSTANTIATION(mtsVFJointLimits);
 
 #endif // _mtsVFJointLimits_h

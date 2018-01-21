@@ -68,10 +68,6 @@ if (cisst_FOUND_AS_REQUIRED)
   set (sawConstraintController_VERSION_PATCH "0")
   set (sawConstraintController_VERSION "${sawConstraintController_VERSION_MAJOR}.${sawConstraintController_VERSION_MINOR}.${sawConstraintController_VERSION_PATCH}")
 
-  # Generate sawConstraintControllerRevision.h
-  configure_file ("${sawConstraintController_SOURCE_DIR}/code/sawConstraintControllerRevision.h.in"
-                  "${sawConstraintController_BINARY_DIR}/include/sawConstraintController/sawConstraintControllerRevision.h")
-
   # create data type using the data generator
   cisst_data_generator (sawConstraintController
                         "${sawConstraintController_BINARY_DIR}/include" # where to save the file
@@ -98,6 +94,7 @@ if(SAW_sawConstraintController_USE_EIGEN)
        ${sawConstraintController_HEADER_DIR}/mtsVFAbsoluteJointLimits.h
        ${sawConstraintController_HEADER_DIR}/mtsVFFollow.h
        ${sawConstraintController_HEADER_DIR}/mtsVF_RCM.h
+       ${sawConstraintController_HEADER_DIR}/mtsVFJointPos.h
        ${sawConstraintController_HEADER_DIR}/constraintOptimizer.h
        )
 

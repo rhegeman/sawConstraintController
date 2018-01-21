@@ -26,7 +26,6 @@
 */
 bool mtsVFController::ActivateVF(const std::string & s)
 {
-/*
     // find vf by data.Name
     std::map<std::string, mtsVFBase *>::iterator itVF;
     itVF = VFMap.find(s);
@@ -37,13 +36,11 @@ bool mtsVFController::ActivateVF(const std::string & s)
         return false;
     }
     itVF->second->Active = true;
-*/
     return true;    
 }
 
 void mtsVFController::DeactivateAll()
 {
-/*
     std::map<std::string,mtsVFBase *>::iterator itVF;
     for(itVF = VFMap.begin(); itVF != VFMap.end(); itVF++)
     {
@@ -52,18 +49,15 @@ void mtsVFController::DeactivateAll()
             itVF->second->Active = false;
         }
     }
-*/
 }
 
 void mtsVFController::UpdateKinematics()
 {
-/*
     std::map<std::string, prmKinematicsState*>::iterator itKin;
     for (itKin = Kinematics.begin(); itKin != Kinematics.end(); itKin++)
     {
       itKin->second->Update();
     }
-*/
 }
 
 //! Removes a kinematics object from the map
@@ -72,7 +66,6 @@ void mtsVFController::UpdateKinematics()
 */
 void mtsVFController::RemoveKinematicsFromMap(const std::string & kinName)
 {
-/*
     // Removes a kinematics object from the map
     std::map<std::string, prmKinematicsState *>::iterator itKin;
     itKin = Kinematics.find(kinName);
@@ -86,7 +79,6 @@ void mtsVFController::RemoveKinematicsFromMap(const std::string & kinName)
     // Now remove from the map and delete the old object
     Kinematics.erase(itKin);
     delete kinP;
-*/
 }
 
 //! Adds/updates a sensor in the map
@@ -95,19 +87,8 @@ void mtsVFController::RemoveKinematicsFromMap(const std::string & kinName)
 */
 void mtsVFController::SetSensor(const prmSensorState & sen)
 {
-/*
     RemoveSensorFromMap(sen.Name);
     Sensors.insert(std::pair<std::string, prmSensorState *>(sen.Name,new prmSensorState(sen)));
-*/
-}
-
-//! Adds/Updates a sensor to the map
-void mtsVFController::SetSensorOffset(const prmOffsetState & sen)
-{
-/*
-    RemoveSensorFromMap(sen.Name);
-    Sensors.insert(std::pair<std::string, prmSensorState *>(sen.Name,new prmOffsetState(sen)));
-*/
 }
 
 //! Removes a sensor from the map
@@ -116,7 +97,6 @@ void mtsVFController::SetSensorOffset(const prmOffsetState & sen)
 */
 void mtsVFController::RemoveSensorFromMap(const std::string & senName)
 {
-/*
     // Removes a sensor from the map
     std::map<std::string, prmSensorState *>::iterator itSen;
     itSen = Sensors.find(senName);
@@ -130,7 +110,6 @@ void mtsVFController::RemoveSensorFromMap(const std::string & senName)
     // Now remove from the map and delete the old object
     Sensors.erase(itSen);
     delete senP;
-*/
 }
 
 //! Reallocates the tableau, assigns references to it for the virtual fixtures, and instructs the virtual fixtures to fill their references in
@@ -138,7 +117,6 @@ void mtsVFController::RemoveSensorFromMap(const std::string & senName)
 */
 void mtsVFController::UpdateOptimizer(double TickTime)
 {
-/*
     // use VFVector to find the space needed in the control optimizer tableau
     Optimizer.ResetIndices();
 
@@ -176,7 +154,6 @@ void mtsVFController::UpdateOptimizer(double TickTime)
 
         }
     }
-*/
 }
 
 //! Solves the constraint optimization problem and fills the result into the parameter
@@ -190,7 +167,6 @@ nmrConstraintOptimizer::STATUS mtsVFController::Solve(vctDoubleVec & dq)
 
 void mtsVFController::LookupBaseData()
 {
-/*
     std::map<std::string, prmKinematicsState *>::iterator kinIt;
     for(kinIt = Kinematics.begin(); kinIt != Kinematics.end(); kinIt++)
     {
@@ -207,7 +183,6 @@ void mtsVFController::LookupBaseData()
             senIt->second->LookupSensor(Sensors);
         }
     }
-*/
 }
 
 //! Helper function for incrementing the users of sensors and kinematics that a new VF requires
@@ -216,7 +191,6 @@ void mtsVFController::LookupBaseData()
 void mtsVFController::IncrementUsers(const std::vector<std::string> kin_names,
     const std::vector<std::string> sensor_names)
 {
-/*
     std::map<std::string,prmKinematicsState *>::iterator itKin;
     std::map<std::string,prmSensorState *>::iterator itSen;
 
@@ -239,13 +213,11 @@ void mtsVFController::IncrementUsers(const std::vector<std::string> kin_names,
             itSen->second->UserCount++;
         }
     }
-*/
 }
 
 void mtsVFController::DecrementUsers(const std::vector<std::string> kin_names,
     const std::vector<std::string> sensor_names)
 {
-/*
     // Reduce the user counts for any kinematics objects used by this VF
     std::map<std::string,prmKinematicsState *>::iterator itKin;
     for(size_t i = 0; i < kin_names.size(); i++)
@@ -267,6 +239,5 @@ void mtsVFController::DecrementUsers(const std::vector<std::string> kin_names,
             itSen->second->UserCount--;
         }
     }
-*/
 }
 

@@ -49,9 +49,8 @@
    which means that you've found the joint angles that
    will put you at exactly the desired position and rotation
  */
-class mtsVFFollow : public mtsVFJointPosition
+class mtsVFFollow : public mtsVFBase
 {
-    CMN_DECLARE_SERVICES(CMN_DYNAMIC_CREATION, CMN_LOG_LOD_RUN_VERBOSE)
 
 public:
 
@@ -60,12 +59,12 @@ public:
 
     /*! Constructor
     */
-    mtsVFFollow() : mtsVFJointPosition(){}
+    mtsVFFollow() : mtsVFBase(){}
 
     /*! Constructor
     \param name String name of object
     */
-    mtsVFFollow(const std::string & name, mtsVFDataBase * data) : mtsVFJointPosition(name,data){}
+    mtsVFFollow(const std::string & name, mtsVFDataBase * data) : mtsVFBase(name,data){}
 
     //! Updates co with virtual fixture data.
     /*! FillInTableauRefs
@@ -73,7 +72,5 @@ public:
     void FillInTableauRefs(const mtsVFBase::CONTROLLERMODE mode, const double TickTime);
 
 };
-
-CMN_DECLARE_SERVICES_INSTANTIATION(mtsVFFollow)
 
 #endif

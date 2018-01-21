@@ -28,19 +28,13 @@
 #include <sawConstraintController/mtsVFBase.h>
 #include <sawConstraintController/prmKinematicsState.h>
 #include <sawConstraintController/prmSensorState.h>
-#include <sawConstraintController/prmOffsetState.h>
 #include <cisstParameterTypes/prmStateJoint.h>
-
-// Always include last!
-#include <sawConstraintController/sawConstraintControllerExport.h>
 
 /*! \brief mtsVFController: A class that is responsible for managing the
     virtual fixtures, relevant state data, and the control optimizer
  */
-// class CISST_EXPORT mtsVFController: public cmnGenericObject
 class mtsVFController
 {
-//    CMN_DECLARE_SERVICES(CMN_NO_DYNAMIC_CREATION, CMN_LOG_LOD_RUN_VERBOSE);
 
 public:
 
@@ -91,9 +85,6 @@ public:
 
     //! Adds/Updates a sensor to the map
     void SetSensor(const prmSensorState & sen);
-
-    //! Adds/Updates a sensor to the map
-    void SetSensorOffset(const prmOffsetState & sen);
 
     //! Removes a sensor from the map
     void RemoveSensorFromMap(const std::string & senName);

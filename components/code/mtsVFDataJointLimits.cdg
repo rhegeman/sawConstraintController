@@ -1,13 +1,10 @@
 inline-header {
 #include <sawConstraintController/mtsVFDataBase.h>
-// Always include last!
-#include <sawConstraintController/sawConstraintControllerExport.h>
 }
 
 class {
 
     name mtsVFDataJointLimits;
-    attribute CISST_EXPORT;
 
     // All VF data objects are subclasses of mtsVFDataBase
     base-class {

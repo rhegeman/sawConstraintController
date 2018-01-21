@@ -1,7 +1,6 @@
 #ifndef _mtsVF_RCM_h
 #define _mtsVF_RCM_h
 
-#include <cisstCommon/cmnGenericObject.h> 
 #include <cisstVector/vctDynamicVectorTypes.h>
 #include <cisstVector/vctFixedSizeVectorTypes.h>
 #include <cisstVector/vctDynamicMatrixTypes.h>
@@ -9,14 +8,13 @@
 #include <sawConstraintController/mtsVFJointPos.h>
 #include <sawConstraintController/mtsVFBase.h>
 
-class mtsVF_RCM : public mtsVFJointPosition
+class mtsVF_RCM : public mtsVFBase
 {
-    CMN_DECLARE_SERVICES(CMN_DYNAMIC_CREATION, CMN_LOG_LOD_RUN_VERBOSE)
 
 public:
 
-    mtsVF_RCM() : mtsVFJointPosition(){}
-    mtsVF_RCM(const std::string & name, mtsVFDataBase * data) : mtsVFJointPosition(name,data){
+    mtsVF_RCM() : mtsVFBase(){}
+    mtsVF_RCM(const std::string & name, mtsVFDataBase * data) : mtsVFBase(name,data){
     	H.SetSize(8,6);
         h.SetSize(8);
         H.Zeros();
@@ -131,8 +129,6 @@ private:
     }
 
 };
-
-CMN_DECLARE_SERVICES_INSTANTIATION(mtsVF_RCM);
 
 #endif
 

@@ -1,12 +1,9 @@
 inline-header {
 #include <cisstVector/vctDynamicVectorTypes.h>
 #include <cisstVector/vctDynamicMatrixTypes.h>
-// Always include last!
-#include <sawConstraintController/sawConstraintControllerExport.h>
 }
 class {
     name prmSensorState;
-    attribute CISST_EXPORT;
     virtual-dtor true;
 
     //! The name of the sensor object

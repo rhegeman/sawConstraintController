@@ -22,7 +22,6 @@
 #include <cisstVector/vctDynamicVectorTypes.h>
 #include <cisstVector/vctDynamicMatrixTypes.h>
 #include <sawConstraintController/mtsVFBase.h>
-#include <sawConstraintController/mtsVFCartVel.h>
 #include <sawConstraintController/mtsVFDataPlane.h>
 
 // Always include last!
@@ -30,20 +29,19 @@
 
 /*! \brief mtsVFPlane: A class that contains logic for the implementation of  Plane virtual fixtures
  */
-class CISST_EXPORT mtsVFPlane : public mtsVFCartesianTranslation
+class mtsVFPlane : public mtsVFBase
 {
-    CMN_DECLARE_SERVICES(CMN_DYNAMIC_CREATION, CMN_LOG_LOD_RUN_VERBOSE);
 
 public:
 
     /*! Constructor
     */
-    mtsVFPlane() : mtsVFCartesianTranslation(){}
+    mtsVFPlane() : mtsVFBase(){}
 
     /*! Constructor
     \param name String name of object
     */
-    mtsVFPlane(const std::string & name, mtsVFDataBase * data) : mtsVFCartesianTranslation(name,data)
+    mtsVFPlane(const std::string & name, mtsVFDataBase * data) : mtsVFBase(name,data)
     {
         IsFrameSet = false;
     }
@@ -61,7 +59,5 @@ private:
     bool IsFrameSet;
     vctFrame4x4<double> frame;
 };
-
-CMN_DECLARE_SERVICES_INSTANTIATION(mtsVFPlane);
 
 #endif // _mtsVFPlane_h

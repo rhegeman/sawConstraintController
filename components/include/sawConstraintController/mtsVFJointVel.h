@@ -21,15 +21,11 @@
 
 #include <sawConstraintController/mtsVFBase.h>
 
-// Always include last!
-#include <sawConstraintController/sawConstraintControllerExport.h>
-
 //! This is the base class for all virtual fixture objects
 /*! \brief mtsVFJointVel: A class that contains logic for the implementation of virtual fixtures
  */
-class CISST_EXPORT mtsVFJointVelocity: public mtsVFBase
+class mtsVFJointVelocity: public mtsVFBase
 {
-    CMN_DECLARE_SERVICES(CMN_DYNAMIC_CREATION, CMN_LOG_LOD_RUN_VERBOSE);
 
 public:
 
@@ -55,7 +51,5 @@ public:
     void ConvertRefs(const mtsVFBase::CONTROLLERMODE mode, const double TickTime);
 
 };
-
-CMN_DECLARE_SERVICES_INSTANTIATION(mtsVFJointVelocity);
 
 #endif // _mtsVFJointVel_h

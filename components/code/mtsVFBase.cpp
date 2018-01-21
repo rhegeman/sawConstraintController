@@ -18,8 +18,6 @@
 
 #include <sawConstraintController/mtsVFBase.h>
 
-CMN_IMPLEMENT_SERVICES(mtsVFBase)
-
 std::string mtsVFBase::DefaultKinematicsName = "";
 
 /*! Constructor
@@ -65,8 +63,8 @@ void mtsVFBase::LookupStateData(const std::map<std::string,prmKinematicsState *>
         }
         else
         {
-            CMN_LOG_CLASS_RUN_ERROR << "LookupStateData: Kinematics object \"" << Data->KinNames.at(i) << " - "  << i << "\" not found" << std::endl;
-            cmnThrow("LookupStateData: Kinematics object \"" + Data->KinNames.at(i) + "\" not found");
+            // CMN_LOG_CLASS_RUN_ERROR << "LookupStateData: Kinematics object \"" << Data->KinNames.at(i) << " - "  << i << "\" not found" << std::endl;
+            //cmnThrow("LookupStateData: Kinematics object \"" + Data->KinNames.at(i) + "\" not found");
         }
     }
 
@@ -81,8 +79,8 @@ void mtsVFBase::LookupStateData(const std::map<std::string,prmKinematicsState *>
         }
         else
         {
-            CMN_LOG_CLASS_RUN_ERROR << "LookupStateData: Sensor object \"" << Data->SensorNames.at(i) << "\" not found" << std::endl;
-            cmnThrow("LookupStateData: Sensor object \"" + Data->SensorNames.at(i) + "\" not found");
+            // CMN_LOG_CLASS_RUN_ERROR << "LookupStateData: Sensor object \"" << Data->SensorNames.at(i) << "\" not found" << std::endl;
+            // cmnThrow("LookupStateData: Sensor object \"" + Data->SensorNames.at(i) + "\" not found");
         }
     }
 }

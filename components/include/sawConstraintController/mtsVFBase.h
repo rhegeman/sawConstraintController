@@ -24,15 +24,11 @@
 #include <sawConstraintController/mtsVFDataBase.h>
 #include <cisstNumerical/nmrConstraintOptimizer.h>
 
-// Always include last!
-#include <sawConstraintController/sawConstraintControllerExport.h>
-
 //! This is the base class for all virtual fixture objects
 /*! \brief mtsVFBase: A class that contains logic for the implementation of virtual fixtures
  */
-class CISST_EXPORT mtsVFBase: public mtsGenericObject
+class mtsVFBase: public mtsGenericObject
 {
-    CMN_DECLARE_SERVICES(CMN_NO_DYNAMIC_CREATION, CMN_LOG_LOD_RUN_VERBOSE)
 
 public:
 
@@ -132,10 +128,10 @@ public:
     //! Converts the data in the references if a change in mode is needed
     virtual void ConvertRefs(const mtsVFBase::CONTROLLERMODE mode, const double TickTime) = 0;
 
-    virtual void AssignRefs(const mtsVFBase::CONTROLLERMODE, const double, const vctDoubleVec & ,vctDoubleMat &, vctDoubleVec &, vctDoubleMat &, vctDoubleVec &, vctDoubleMat &, vctDoubleVec &){}
+    virtual void AssignRefs(const mtsVFBase::CONTROLLERMODE, const double,
+        const vctDoubleVec & ,vctDoubleMat &, vctDoubleVec &, vctDoubleMat &,
+        vctDoubleVec &, vctDoubleMat &, vctDoubleVec &){}
 
 };
-
-CMN_DECLARE_SERVICES_INSTANTIATION(mtsVFBase)
 
 #endif // _mtsVFBase_h

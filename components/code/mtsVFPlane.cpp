@@ -18,8 +18,6 @@
 
 #include <sawConstraintController/mtsVFPlane.h>
 
-CMN_IMPLEMENT_SERVICES(mtsVFPlane)
-
 //! Updates co with virtual fixture data.
 /*! FillInTableauRefs
 */

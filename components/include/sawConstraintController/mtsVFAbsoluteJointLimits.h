@@ -25,25 +25,22 @@
 #include <sawConstraintController/mtsVFJointPos.h>
 #include <sawConstraintController/mtsVFDataAbsoluteJointLimits.h>
 
-// Always include last!
-#include <sawConstraintController/sawConstraintControllerExport.h>
-
 /*! \brief mtsVFAbsoluteJointLimits: A class that contains logic for the implementation of joint limits
  */
-class CISST_EXPORT mtsVFAbsoluteJointLimits : public mtsVFJointPosition
+class mtsVFAbsoluteJointLimits : public mtsVFBase
 {
-    CMN_DECLARE_SERVICES(CMN_DYNAMIC_CREATION, CMN_LOG_LOD_RUN_VERBOSE);
 
 public:
 
     /*! Constructor
     */
-    mtsVFAbsoluteJointLimits() : mtsVFJointPosition(){}
+    mtsVFAbsoluteJointLimits() : mtsVFBase(){}
 
     /*! Constructor
     \param name String name of object
     */
-    mtsVFAbsoluteJointLimits(const std::string & name, mtsVFDataAbsoluteJointLimits * data) : mtsVFJointPosition(name,data){}
+    mtsVFAbsoluteJointLimits(const std::string & name,
+        mtsVFDataAbsoluteJointLimits * data) : mtsVFBase(name,data){}
 
     //! Updates co with virtual fixture data.
     /*! FillInTableauRefs
@@ -51,7 +48,5 @@ public:
     void FillInTableauRefs(const mtsVFBase::CONTROLLERMODE mode, const double TickTime);
 
 };
-
-CMN_DECLARE_SERVICES_INSTANTIATION(mtsVFAbsoluteJointLimits);
 
 #endif // _mtsVFAbsoluteJointLimits_h

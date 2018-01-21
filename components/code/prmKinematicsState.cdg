@@ -1,12 +1,9 @@
 inline-header {
 #include <cisstParameterTypes/prmStateJoint.h>
 #include <cisstVector/vctDynamicMatrixTypes.h>
-// Always include last!
-#include <sawConstraintController/sawConstraintControllerExport.h>
 }
 class {
     name prmKinematicsState;
-    attribute CISST_EXPORT;
     virtual-dtor true;
 
     //! The cartesian frame of the kinematics object

@@ -18,8 +18,6 @@
 
 #include <sawConstraintController/mtsVFJointVel.h>
 
-CMN_IMPLEMENT_SERVICES(mtsVFJointVelocity);
-
 //! Updates co with virtual fixture data.
 /*! FillInTableauRefs
 */
