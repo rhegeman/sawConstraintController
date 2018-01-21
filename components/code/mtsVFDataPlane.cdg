@@ -1,5 +1,6 @@
 inline-header {
 #include <sawConstraintController/mtsVFDataBase.h>
+#include <sawConstraintController/prmStatePoint.h>
 // Always include last!
 #include <sawConstraintController/sawConstraintControllerExport.h>
 }
@@ -19,13 +20,6 @@ class {
       name Normal;
       type vct3;
       default vct3(0.0,0.0,1.0);
-      visibility public;
-    }
-
-    member {
-      name PointOnPlane;
-      type vct3;
-      default vct3(0.0,0.0,0.0);
       visibility public;
     }
 

@@ -30,3 +30,4 @@ template<typename KT> void mtsVFController::SetKinematics(const KT &kin)
   RemoveKinematicsFromMap(kin.Name);
   Kinematics.insert(std::pair<std::string, prmKinematicsState *>(kin.Name, new KT(kin)));
 }
+

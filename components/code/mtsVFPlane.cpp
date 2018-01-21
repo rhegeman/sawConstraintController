@@ -38,6 +38,8 @@ void mtsVFPlane::FillInTableauRefs(const CONTROLLERMODE CMN_UNUSED(mode), const 
             d is the constant calculated using above formula
     */
 
+    mtsVFDataPlane *planeData = (mtsVFDataPlane*)(Data);
+
     if(Kinematics.size() < 1)
     {
         CMN_LOG_CLASS_RUN_ERROR << "FillInTableauRefs: Plane VF given improper input" << std::endl;
@@ -47,14 +49,6 @@ void mtsVFPlane::FillInTableauRefs(const CONTROLLERMODE CMN_UNUSED(mode), const 
     // Pointer to kinematics
     CurrentKinematics = Kinematics.at(0);
     vct3 CurrentPos(CurrentKinematics->Frame.Translation());
-
-    mtsVFDataPlane *planeData = (mtsVFDataPlane*)(Data);
-
-    if(!planeData)
-    {
-        CMN_LOG_CLASS_RUN_ERROR << "Plane data object not set" << std::endl;
-        return;
-    }
 
     vctDynamicMatrix<double> N( 1, 3, VCT_COL_MAJOR );
     N.SetAll(0);
@@ -74,7 +68,7 @@ void mtsVFPlane::FillInTableauRefs(const CONTROLLERMODE CMN_UNUSED(mode), const 
         N[0][0] = planeData->Normal[0];
         N[0][1] = planeData->Normal[1];
         N[0][2] = planeData->Normal[2];
-        d = vct1(vctDotProduct(planeData->Normal, planeData->PointOnPlane));
+        d = vct1(vctDotProduct(planeData->Normal, vct3(Sensors.at(0)->Values)));
     }    
 
 

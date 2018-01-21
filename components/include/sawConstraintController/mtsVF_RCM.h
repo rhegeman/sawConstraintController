@@ -6,9 +6,7 @@
 #include <cisstVector/vctFixedSizeVectorTypes.h>
 #include <cisstVector/vctDynamicMatrixTypes.h>
 #include <cisstVector/vctFixedSizeVectorTypes.h>
-#include <cisstNumerical/nmrLSqLin.h>
 #include <sawConstraintController/mtsVFJointPos.h>
-#include <sawConstraintController/mtsVFDataRCM.h>
 #include <sawConstraintController/mtsVFBase.h>
 
 class mtsVF_RCM : public mtsVFJointPosition
@@ -18,7 +16,7 @@ class mtsVF_RCM : public mtsVFJointPosition
 public:
 
     mtsVF_RCM() : mtsVFJointPosition(){}
-    mtsVF_RCM(const std::string & name, mtsVFDataRCM * data) : mtsVFJointPosition(name,data){
+    mtsVF_RCM(const std::string & name, mtsVFDataBase * data) : mtsVFJointPosition(name,data){
     	H.SetSize(8,6);
         h.SetSize(8);
         H.Zeros();

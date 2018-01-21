@@ -37,9 +37,10 @@
 /*! \brief mtsVFController: A class that is responsible for managing the
     virtual fixtures, relevant state data, and the control optimizer
  */
-class CISST_EXPORT mtsVFController: public cmnGenericObject
+// class CISST_EXPORT mtsVFController: public cmnGenericObject
+class mtsVFController
 {
-    CMN_DECLARE_SERVICES(CMN_NO_DYNAMIC_CREATION, CMN_LOG_LOD_RUN_VERBOSE);
+//    CMN_DECLARE_SERVICES(CMN_NO_DYNAMIC_CREATION, CMN_LOG_LOD_RUN_VERBOSE);
 
 public:
 
