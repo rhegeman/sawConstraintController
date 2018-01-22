@@ -22,10 +22,7 @@
 #include <cisstVector/vctDynamicVectorTypes.h>
 #include <cisstVector/vctDynamicMatrixTypes.h>
 #include <sawConstraintController/mtsVFBase.h>
-#include <sawConstraintController/mtsVFDataPlane.h>
-
-// Always include last!
-#include <sawConstraintController/sawConstraintControllerExport.h>
+#include <sawConstraintController/mtsVFData.h>
 
 /*! \brief mtsVFPlane: A class that contains logic for the implementation of  Plane virtual fixtures
  */

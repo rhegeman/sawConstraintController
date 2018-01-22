@@ -19,15 +19,14 @@
 #ifndef _mtsVFBase_h
 #define _mtsVFBase_h
 
-#include <sawConstraintController/prmKinematicsState.h>
-#include <sawConstraintController/prmSensorState.h>
-#include <sawConstraintController/mtsVFDataBase.h>
+#include <sawConstraintController/mtsVFData.h>
 #include <cisstNumerical/nmrConstraintOptimizer.h>
+#include <sawConstraintController/prmState.h>
 
 //! This is the base class for all virtual fixture objects
 /*! \brief mtsVFBase: A class that contains logic for the implementation of virtual fixtures
  */
-class mtsVFBase: public mtsGenericObject
+class mtsVFBase
 {
 
 public:
@@ -124,9 +123,6 @@ public:
     virtual void FillInTableauRefs(const mtsVFBase::CONTROLLERMODE Mode, const double TickTime) = 0;
 
     vctDoubleMat Skew(const vctDoubleVec & in);
-
-    //! Converts the data in the references if a change in mode is needed
-    virtual void ConvertRefs(const mtsVFBase::CONTROLLERMODE mode, const double TickTime) = 0;
 
     virtual void AssignRefs(const mtsVFBase::CONTROLLERMODE, const double,
         const vctDoubleVec & ,vctDoubleMat &, vctDoubleVec &, vctDoubleMat &,

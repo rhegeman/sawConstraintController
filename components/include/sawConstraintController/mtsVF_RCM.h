@@ -5,7 +5,6 @@
 #include <cisstVector/vctFixedSizeVectorTypes.h>
 #include <cisstVector/vctDynamicMatrixTypes.h>
 #include <cisstVector/vctFixedSizeVectorTypes.h>
-#include <sawConstraintController/mtsVFJointPos.h>
 #include <sawConstraintController/mtsVFBase.h>
 
 class mtsVF_RCM : public mtsVFBase
@@ -81,13 +80,13 @@ private:
 		bool sanityCheckOkay = true;
 		for (int cc = 0; cc < 3; cc++) {
 			for (int rr = 0; rr < 3; rr++) {
-				if (!CMN_ISFINITE(R(rr, cc))) sanityCheckOkay &= false;
+				// if (!CMN_ISFINITE(R(rr, cc))) sanityCheckOkay &= false;
 			}
 		}
 		if (sanityCheckOkay == false) {
-			CMN_LOG_CLASS_RUN_ERROR << "#### Dx ####" << std::endl << Dx << "########" << std::endl;
-			CMN_LOG_CLASS_RUN_ERROR << "#### Dy ####" << std::endl << Dy << "########" << std::endl;
-			CMN_LOG_CLASS_RUN_ERROR << "#### Zaxis ####" << std::endl << Zaxis << "########" << std::endl;
+			// CMN_LOG_CLASS_RUN_ERROR << "#### Dx ####" << std::endl << Dx << "########" << std::endl;
+			// CMN_LOG_CLASS_RUN_ERROR << "#### Dy ####" << std::endl << Dy << "########" << std::endl;
+			// CMN_LOG_CLASS_RUN_ERROR << "#### Zaxis ####" << std::endl << Zaxis << "########" << std::endl;
 		}
 	}
 
@@ -102,15 +101,15 @@ private:
 		lineD(1) /= sqrtNorm;
 		lineD(2) /= sqrtNorm;
 	    } else {
-		CMN_LOG_CLASS_RUN_ERROR << "FAILURE: " << lineD << std::endl;
+		// CMN_LOG_CLASS_RUN_ERROR << "FAILURE: " << lineD << std::endl;
 	    }
 	    double bx = givenPt(0) - linePoint(0);
 	    double by = givenPt(1) - linePoint(1);
 	    double bz = givenPt(2) - linePoint(2);
 	    double d = bx*lineD(0) + by*lineD(1)+bz*lineD(2);
-	    if (!CMN_ISFINITE(d)) {
-		CMN_LOG_CLASS_RUN_ERROR << "FAILURE: " << lineD << " " << d << std::endl;
-	    }
+	    // if (!CMN_ISFINITE(d)) {
+	//	CMN_LOG_CLASS_RUN_ERROR << "FAILURE: " << lineD << " " << d << std::endl;
+	  //  }
 	    xcl(0) = linePoint(0) + lineD(0)*d;
 	    xcl(1) = linePoint(1) + lineD(1)*d;
 	    xcl(2) = linePoint(2) + lineD(2)*d;

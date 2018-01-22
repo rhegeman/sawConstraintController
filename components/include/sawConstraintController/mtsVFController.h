@@ -25,10 +25,8 @@
 #include <cisstNumerical/nmrConstraintOptimizer.h>
 #endif
 
+#include <sawConstraintController/prmState.h>
 #include <sawConstraintController/mtsVFBase.h>
-#include <sawConstraintController/prmKinematicsState.h>
-#include <sawConstraintController/prmSensorState.h>
-#include <cisstParameterTypes/prmStateJoint.h>
 
 /*! \brief mtsVFController: A class that is responsible for managing the
     virtual fixtures, relevant state data, and the control optimizer
@@ -88,9 +86,6 @@ public:
 
     //! Removes a sensor from the map
     void RemoveSensorFromMap(const std::string & senName);
-
-    //! Finds the "base" object for kinematics and sensor data that has an offset
-    void LookupBaseData(void);
 
     void UpdateKinematics(void);
 

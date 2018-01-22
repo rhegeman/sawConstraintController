@@ -21,7 +21,7 @@
 //! Updates co with virtual fixture data.
 /*! FillInTableauRefs
 */
-void mtsVFPlane::FillInTableauRefs(const CONTROLLERMODE CMN_UNUSED(mode), const double TickTime)
+void mtsVFPlane::FillInTableauRefs(const CONTROLLERMODE mode, const double TickTime)
 {    
     /*
          Fill in refs
@@ -40,7 +40,7 @@ void mtsVFPlane::FillInTableauRefs(const CONTROLLERMODE CMN_UNUSED(mode), const 
 
     if(Kinematics.size() < 1)
     {
-        CMN_LOG_CLASS_RUN_ERROR << "FillInTableauRefs: Plane VF given improper input" << std::endl;
+        // CMN_LOG_CLASS_RUN_ERROR << "FillInTableauRefs: Plane VF given improper input" << std::endl;
         cmnThrow("FillInTableauRefs: Plane VF given improper input");
     }
 

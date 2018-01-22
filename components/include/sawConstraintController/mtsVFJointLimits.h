@@ -22,7 +22,7 @@
 #include <cisstVector/vctDynamicVectorTypes.h>
 #include <cisstVector/vctDynamicMatrixTypes.h>
 #include <sawConstraintController/mtsVFBase.h>
-#include <sawConstraintController/mtsVFDataJointLimits.h>
+#include <sawConstraintController/mtsVFData.h>
 
 /*! \brief mtsVFJointLimits: A class that contains logic for the implementation of  Plane virtual fixtures
  */

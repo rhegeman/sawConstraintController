@@ -45,5 +45,5 @@ void mtsVFJointLimits::FillInTableauRefs(const CONTROLLERMODE mode, const double
 
 //    std::cout << "Mat Ine \n" << IneqConstraintMatrixRef << std::endl;
 //    std::cout << "Vec Ine \n" << IneqConstraintVectorRef << std::endl;
-    ConvertRefs(mode,TickTime);
 }
+

@@ -22,8 +22,7 @@
 #include <cisstVector/vctDynamicVectorTypes.h>
 #include <cisstVector/vctDynamicMatrixTypes.h>
 #include <sawConstraintController/mtsVFBase.h>
-#include <sawConstraintController/mtsVFJointPos.h>
-#include <sawConstraintController/mtsVFDataAbsoluteJointLimits.h>
+#include <sawConstraintController/mtsVFData.h>
 
 /*! \brief mtsVFAbsoluteJointLimits: A class that contains logic for the implementation of joint limits
  */

@@ -50,6 +50,18 @@ Eigen::VectorXd convertCisstToEigen(const vctDynamicVector<double> &x)
 
 
 nmrConstraintOptimizer::nmrConstraintOptimizer(const size_t n)
+  : C(),
+    d(),
+    A(),
+    b(),
+    E(),
+    f(),
+    NumVars(),
+    Slacks(),
+    CIndex(),
+    AIndex(),
+    EIndex(),
+    SlackIndex()
 {
     Slacks = 0;
     NumVars = n;

@@ -165,26 +165,6 @@ nmrConstraintOptimizer::STATUS mtsVFController::Solve(vctDoubleVec & dq)
     return Optimizer.Solve(dq);
 }
 
-void mtsVFController::LookupBaseData()
-{
-    std::map<std::string, prmKinematicsState *>::iterator kinIt;
-    for(kinIt = Kinematics.begin(); kinIt != Kinematics.end(); kinIt++)
-    {
-        if(kinIt->second->NeedsBase)
-        {
-            kinIt->second->LookupKinematics(Kinematics);
-        }
-    }
-    std::map<std::string, prmSensorState *>::iterator senIt;
-    for(senIt = Sensors.begin(); senIt != Sensors.end(); senIt++)
-    {
-        if(senIt->second->NeedsBase)
-        {
-            senIt->second->LookupSensor(Sensors);
-        }
-    }
-}
-
 //! Helper function for incrementing the users of sensors and kinematics that a new VF requires
 /*! IncrementUsers
   */

@@ -1,6 +1,6 @@
 #include <sawConstraintController/mtsVF_RCM.h>
 
-void mtsVF_RCM::FillInTableauRefs(const CONTROLLERMODE CMN_UNUSED(mode), const double TickTime)
+void mtsVF_RCM::FillInTableauRefs(const CONTROLLERMODE mode, const double TickTime)
 {
 
     // Constraint-Based RCM
