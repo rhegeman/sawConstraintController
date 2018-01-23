@@ -1,13 +1,6 @@
 
 #include <sawConstraintController/prmState.h>
 
-prmKinematicsState::prmKinematicsState(const std::string & n, prmJointState * js)
-{
-    Name = n;
-    UserCount = 0;
-    JointState = js;
-}
-
 prmKinematicsState::prmKinematicsState(void):
       Frame()
     , Jacobian()
@@ -24,8 +17,17 @@ prmKinematicsState::prmKinematicsState(const prmKinematicsState & other):
     , JointState(other.JointState)
 {}
 
-prmKinematicsState::~prmKinematicsState()
+prmKinematicsState::~prmKinematicsState(void)
 {
+}
+
+prmKinematicsState::prmKinematicsState(const std::string & n, prmJointState * js)
+  : Frame(),
+    Jacobian()
+{
+    Name = n;
+    UserCount = 0;
+    JointState = js;
 }
 
 std::string prmKinematicsState::HumanReadable(void) const {

@@ -24,12 +24,12 @@ struct prmKinematicsState
   std::string Name;
   prmJointState *JointState;
 
-  ~prmKinematicsState();
-
-  virtual void LookupKinematics(const std::map<std::string,prmKinematicsState*>&) {}
   prmKinematicsState(void);
   prmKinematicsState(const prmKinematicsState& other);
   prmKinematicsState(const std::string &n, prmJointState *js);
+  ~prmKinematicsState(void);
+
+  virtual void LookupKinematics(const std::map<std::string,prmKinematicsState*>&) {}
   virtual void Update() {}
   std::string HumanReadable(void) const;
 };

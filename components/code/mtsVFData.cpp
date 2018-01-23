@@ -1,7 +1,25 @@
 #include <sawConstraintController/mtsVFData.h>
 
 mtsVFDataBase::mtsVFDataBase()
+    : Name()
+    , Importance(1.0)
+    , KinNames()
+    , SensorNames()
+    , SlackLimits()
+    , SlackCosts()
+    , NumSlacks(0)
+    , DOFSelections()
+    , ObjectiveRows(0)
+    , IneqConstraintRows(0)
+    , EqConstraintRows(0)
+    , ObjectiveMatrix()
+    , ObjectiveVector()
+    , IneqConstraintMatrix()
+    , IneqConstraintVector()
+    , EqConstraintMatrix()
+    , EqConstraintVector()
 {
+  std::cout << "NumSlacks = " << NumSlacks << std::endl;
 }
 
 mtsVFDataBase::mtsVFDataBase(const mtsVFDataBase &other)

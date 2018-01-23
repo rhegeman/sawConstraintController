@@ -12,7 +12,6 @@
 project (sawConstraintController)
 cmake_minimum_required (VERSION 2.8)
 
-
 # find required dependencies
 set(EIGEN3_INCLUDE_DIR "Eigen include directory" CACHE PATH "")
 include_directories(${EIGEN3_INCLUDE_DIR})
@@ -51,8 +50,8 @@ set (HEADER_FILES
    ${sawConstraintController_HEADER_DIR}/mtsVFJointLimits.h
    ${sawConstraintController_HEADER_DIR}/mtsVFAbsoluteJointLimits.h
    ${sawConstraintController_HEADER_DIR}/mtsVF_RCM.h
-   ${sawConstraintController_HEADER_DIR}/constraintOptimizer.h
-   ${sawConstraintController_HEADER_DIR}/prmState.h
+   # ${sawConstraintController_HEADER_DIR}/constraintOptimizer.h
+   # ${sawConstraintController_HEADER_DIR}/prmState.h
    ${sawConstraintController_HEADER_DIR}/mtsVFData.h
  )
 
@@ -64,8 +63,6 @@ set (HEADER_FILES
        code/mtsVFJointLimits.cpp
        code/mtsVFAbsoluteJointLimits.cpp
        code/mtsVF_RCM.cpp
-       code/constraintOptimizer.cpp
-       code/eiquadprog.hpp
        code/prmState.cpp
        code/mtsVFData.cpp
        )
@@ -73,8 +70,7 @@ set (HEADER_FILES
 add_library (sawConstraintController
                ${HEADER_FILES}
                ${SOURCE_FILES}
-               ${sawConstraintController_CISST_DG_SRCS}
-               ${sawConstraintController_CISST_DG_HDRS})
+               )
 
 set_property (TARGET sawConstraintController PROPERTY FOLDER "sawConstraintController")
 cisst_target_link_libraries (sawConstraintController ${REQUIRED_CISST_LIBRARIES})
