@@ -88,7 +88,7 @@ cisst_add_config_version ("${sawConstraintController_CONFIG_FILE_DIR}/sawConstra
 # Install targets for headers and library
 install (DIRECTORY
          "${sawConstraintController_SOURCE_DIR}/include/sawConstraintController"
-         "${sawConstraintController_BINARY_DIR}/include/sawConstraintController"
+#         "${sawConstraintController_BINARY_DIR}/include/sawConstraintController"
          DESTINATION include
          PATTERN .svn EXCLUDE)
 
