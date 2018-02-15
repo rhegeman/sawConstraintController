@@ -83,5 +83,3 @@ prmJointState::prmJointState(const prmJointState & other):
 
 prmJointState::~prmJointState(void){}
 
-
-
