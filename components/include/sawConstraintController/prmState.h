@@ -47,7 +47,6 @@ struct prmSensorState
   virtual void LookupSensor(const std::map<std::string, prmSensorState*> &) {};
 
   std::string HumanReadable(void) const;
-
 };
 
 #endif
